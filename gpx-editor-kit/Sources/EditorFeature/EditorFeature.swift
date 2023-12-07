@@ -57,10 +57,12 @@ public struct GPXEditor {
             .onChange(of: \.segmentationLength) { old, new in
                 Reduce { state, action in
                     let coords = state.track.trackPoints.map(\.coordinate)
-                    state.graph = .init(
+                    if let new = try? TrackGraph(
                         coords: coords.smoothedElevation(sampleCount: Int(state.threshold)),
                         elevationSmoothing: .segmentation(new)
-                    )
+                    ) {
+                        state.graph = new
+                    }
                     state.maxGrade = state.graph.gradeSegments.max(by: { $0.grade < $1.grade })?.grade ?? .zero
                     return .none
                 }
@@ -110,7 +112,9 @@ public struct GPXEditor {
             case .flattenButtonTapped:
                 let coords = state.track.trackPoints.map(\.coordinate)
                 state.graph = .init(coords: coords)
-                state.graph.gradeSegments = state.graph.gradeSegments.flatten(maxDelta: state.maxSlope)
+                if let new = try? state.graph.gradeSegments.flatten(maxDelta: state.maxSlope) {
+                    state.graph.gradeSegments = new
+                }
                 state.selectedGradeSegment = nil
                 state.maxGrade = state.graph.gradeSegments.max(by: { $0.grade < $1.grade })?.grade ?? .zero
                 return .none
@@ -123,13 +127,15 @@ public struct GPXEditor {
                 return .none
             case .combineButtonTapped:
                 let coords = state.track.trackPoints.map(\.coordinate)
-                state.graph = .init(
+                if let new = try? TrackGraph(
                     coords: coords,
                     elevationSmoothing: .combined(
                         smoothingSampleCount: Int(state.threshold),
                         maxGradeDelta: state.maxSlope
                     )
-                )
+                ) {
+                    state.graph = new
+                }
                 state.selectedGradeSegment = nil
                 state.maxGrade = state.graph.gradeSegments.max(by: { $0.grade < $1.grade })?.grade ?? .zero
                 return .none
