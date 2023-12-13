@@ -16,7 +16,7 @@ extension GPXEditor.State: FileDocument {
         else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        let track = try parser.parse().get()
+        let track = try parser.parse(elevationSmoothing: .none).get()
         self.init(track: track)
     }
 
