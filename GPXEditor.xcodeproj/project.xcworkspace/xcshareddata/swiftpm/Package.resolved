@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mmllr/GPXKit.git",
       "state" : {
-        "revision" : "d7d504f380fd794d9dd149f65641ef126bf7d2af",
-        "version" : "2.0.2"
+        "revision" : "7aa6c7ad730a6a77a36eb7fd3f4ae54981de7bf7",
+        "version" : "2.0.4"
       }
     },
     {

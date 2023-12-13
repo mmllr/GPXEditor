@@ -19,7 +19,7 @@ let package = Package(
             targets: ["ElevationClient"]
         )
     ], dependencies: [
-        .package(url: "https://github.com/mmllr/GPXKit.git", from: "2.0.2"),
+        .package(url: "https://github.com/mmllr/GPXKit.git", from: "2.0.4"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", branch: "observation-beta"),
         .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.1"),
