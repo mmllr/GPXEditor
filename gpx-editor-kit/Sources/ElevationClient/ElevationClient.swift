@@ -6,7 +6,7 @@ import URLRouting
 
 @DependencyClient
 public struct ElevationClient: Sendable {
-    public var update: ([Coordinate]) async throws -> [Coordinate]
+    public var update: @Sendable ([Coordinate]) async throws -> [Coordinate]
 }
 
 extension ElevationClient: TestDependencyKey {
