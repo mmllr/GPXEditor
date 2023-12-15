@@ -13,14 +13,16 @@ struct ElevationGraphView: View {
                 AreaMark(
                     x: .value("Distance", grade.start),
                     yStart: .value("Altitude", 0),
-                    yEnd: .value("Altitude", grade.elevationAtStart)
+                    yEnd: .value("Altitude", grade.elevationAtStart),
+                    series: .value("id", grade.id)
                 )
                 .foregroundStyle(by: .value("Grade", grade.grade * 100))
 
                 AreaMark(
                     x: .value("Distance", grade.end),
                     yStart: .value("Altitude", grade.elevationAtEnd),
-                    yEnd: .value("Altitude", 0)
+                    yEnd: .value("Altitude", 0),
+                    series: .value("id", grade.id)
                 )
                 .foregroundStyle(by: .value("Grade", grade.grade * 100))
             }
