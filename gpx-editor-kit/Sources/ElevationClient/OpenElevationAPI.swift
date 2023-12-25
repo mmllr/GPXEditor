@@ -32,6 +32,9 @@ let locationsRouter = Route(.case(LocationsRoute.locations)) {
         "v1"
         "lookup"
     }
-    Headers { Field("Content-Type") { "application/json" } }
+    Headers {
+        Field("Accept") { "application/json" }
+        Field("Content-Type") { "application/json" }
+    }
     Body(.json(LocationsRequest.self))
 }
